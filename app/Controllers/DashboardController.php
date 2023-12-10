@@ -6,6 +6,11 @@ class DashboardController extends BaseController
 {
     public function index()
     {
+        $session = session();
+        if (!$session->get('isLoggedIn')) {
+            return redirect()->to('/login');
+        }
+        
         return view('dashboard');
     }
     // Function to fetch Apache logs
