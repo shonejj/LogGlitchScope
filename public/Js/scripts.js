@@ -53,8 +53,46 @@ function fetchLogs() {
         });
       
   }
+
+  // Function to open the logout confirmation modal
+  function confirmLogout() {
+    var modal = document.getElementById('logoutModal');
+    modal.style.display = 'block';
+  }
+
+  // Function to close the logout confirmation modal
+  function closeModal() {
+    var modal = document.getElementById('logoutModal');
+    modal.style.display = 'none';
+  }
+
+  // Logout function (you can customize this function)
+  function logout() {
+    // Code to logout goes here
+    console.log('User logged out.');
+    // Example: Redirect to logout page
+    window.location.href = '/logout';
+  }
   
   setInterval(fetchLogs, 3000);
   
   fetchLogs(); // Initial fetch when the page loads
+  
+  // Automatically close the alerts after 5 seconds
+  document.addEventListener('DOMContentLoaded', function() {
+    const successAlert = document.querySelector('.alert.success');
+    const errorAlert = document.querySelector('.alert.error');
+
+    if (successAlert) {
+      setTimeout(function() {
+        successAlert.style.display = 'none';
+      }, 5000);
+    }
+
+    if (errorAlert) {
+      setTimeout(function() {
+        errorAlert.style.display = 'none';
+      }, 5000);
+    }
+  });
   

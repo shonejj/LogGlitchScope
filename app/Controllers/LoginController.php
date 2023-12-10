@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Controllers;
 
@@ -16,13 +16,8 @@ class LoginController extends BaseController
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        // print_r($username);
-        // print_r($password);
-        // exit();
-
         $userModel = new UserModel();
         $user = $userModel->where('username', $username)->first();
-
 
         if ($user && password_verify($password, $user['password'])) {
             // Start session and set user details
@@ -33,10 +28,14 @@ class LoginController extends BaseController
                 'isLoggedIn' => true
             ]);
 
+            // Set success flash message
+            $session->setFlashdata('success', 'Login successful');
             return redirect()->to('/dashboard'); // Redirect to dashboard upon successful login
         } else {
-            // Redirect back to login page with error message
-            return redirect()->back()->with('error', 'Invalid username or password');
+            // Set error flash message
+            $session = session();
+            $session->setFlashdata('error', 'Invalid username or password');
+            return redirect()->to('/login'); // Redirect back to login page with error message
         }
     }
 
@@ -46,6 +45,8 @@ class LoginController extends BaseController
         $session = session();
         $session->destroy();
 
+        // Set success flash message for logout
+        $session->setFlashdata('success', 'Logged out successfully');
         return redirect()->to('/login'); // Redirect to login page after logout
     }
 }
