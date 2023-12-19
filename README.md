@@ -17,3 +17,5 @@ Fix Things Faster: Helps you solve issues quickly so your server works better.
 LogGlitchScope makes it simple to keep an eye on your server's health and fix any issues before they become big problems.
 
 Start using LogGlitchScope today and keep your server running smoothly!
+
+default username and password will be admin 
